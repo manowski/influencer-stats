@@ -5,9 +5,16 @@ import store from './store'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueAnalytics from 'vue-analytics'
+
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
+
+Vue.use(VueAnalytics, {
+  id: 'UA-xxxxxx-x',
+  router
+})
 
 Vue.config.productionTip = false
 
