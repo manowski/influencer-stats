@@ -152,6 +152,15 @@ export default {
     };
   }, // data
 
+  metaInfo() {
+    return {
+      title: this.user.name + ' TikTok Stats Summary Profile & Analytics Dashboard',
+      titleTemplate: '%s',
+      meta: [
+        { name: 'description', content: 'Check how many followers does ' + this.user.name + ' and Real-Time subscriber count'},
+      ],
+  }},
+
   mounted() {
     this.getUser();
   }, //mounted

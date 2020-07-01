@@ -52,6 +52,15 @@ export default {
     };
   },
 
+  metaInfo () {
+    return {
+      title: 'Top 200 Most followed TikTok in ' + this.countries + ' sorted by followers',
+      titleTemplate: '%s',
+      meta: [
+        { name: 'description', content: 'Most followed TikTok in ' + this.countries + ' sorted by followers'},
+      ],
+  }},
+
   mounted() {
     this.getUsers();
   },
