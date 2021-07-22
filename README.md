@@ -5,7 +5,7 @@
 TikTok influencer stats to track users statistic.
 
 Website:
-[https://tiktokblade.com](https://tiktokblade.com)
+[https://insiflow.com](https://insiflow.com)
 
 ### Tech
 
