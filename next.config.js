@@ -9,7 +9,6 @@ module.exports = {
       'images.ctfassets.net',
       's3-us-west-2.amazonaws.com',
       'res.cloudinary.com',
-      'res.cloudinary.com',
       'cdn.insiflow.com',
     ],
   },
