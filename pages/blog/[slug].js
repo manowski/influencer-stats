@@ -14,8 +14,35 @@ const client = createClient({
 })
 
 export async function getServerSideProps({params}) {
-    
   const single_article = params.slug;
+  const redis_key = single_article + 'insi';
+  let cache = await redis.get(redis_key);
+  cache = JSON.parse(cache);
+  try {
+    if (cache) {
+      return {
+        props: { 
+          article: cache
+        }
+      }
+    } else {
+      const response = await client.getEntries({
+        content_type: 'insiflow',
+        'fields.slug': params.slug
+      })
+      let response_article = response.items[0];
+      redis.set(redis_key, JSON.stringify(response_article), 'EX', 60 * 60 * 12)
+      return {
+        props: { 
+          article: response_article
+        }
+      }
+    }
+  } catch (error) {
+      return {
+        notFound: true
+      }
+    }
 }
 
 const ArticlePost = ({ article }) => {
@@ -46,7 +73,7 @@ const ArticlePost = ({ article }) => {
         />
         <div className='bg-sky-800'>
           <div className='container mx-auto px-5 text-white py-20'>
-            <h1 className='text-4xl font-bold pb-4'>{title}</h1>
+            <h2 className='text-4xl font-bold pb-4'>{title}</h2>
             <p>{createTime}</p>
           </div>
         </div>
@@ -55,7 +82,15 @@ const ArticlePost = ({ article }) => {
         </div>
                 
         <div className='article container px-5 py-10 md:w-9/12 mx-auto text-lg'>
-      </div>
+          {documentToReactComponents(content, {
+            renderNode: {
+              [BLOCKS.EMBEDDED_ASSET]: (node) => 
+                <div className=''>
+                  <Image src={`https:${node.data.target.fields.file.url}`} alt={node.data.target.fields.title} width={node.data.target.fields.file.details.image.width} height={node.data.target.fields.file.details.image.height}/>
+                </div>
+            }
+          })}
+        </div>
     </div>
   )
 }
