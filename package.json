@@ -22,7 +22,7 @@
     "graphql": "^16.6.0",
     "graphql-request": "^5.1.0",
     "ioredis": "^5.3.1",
-    "next": "13.1.6",
+    "next": "13.5.0",
     "next-auth": "^4.19.2",
     "next-seo": "^5.15.0",
     "react": "18.2.0",
